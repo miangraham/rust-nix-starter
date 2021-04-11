@@ -1,6 +1,5 @@
 let
   sources = import ./sources.nix;
-  moz-overlay = import sources.nixpkgs-mozilla;
-  rust-overlay = import ./rust-overlay.nix;
+  rust-overlay = import sources.fenix;
 in
-[ moz-overlay rust-overlay ]
+[ rust-overlay ]

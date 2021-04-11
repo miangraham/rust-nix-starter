@@ -4,9 +4,9 @@ let
   pkgs = import sources.nixpkgs {
     inherit overlays;
   };
+  rust = pkgs.rust-nightly.complete;
   naersk = (pkgs.callPackage sources.naersk {}).override {
-    rustc = pkgs.rustc;
-    cargo = pkgs.rustc;
+    inherit (rust) rustc cargo;
   };
 in
 naersk.buildPackage {

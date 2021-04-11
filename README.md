@@ -52,13 +52,11 @@ Hello, world!
 
 Crate dependencies use [Cargo.lock](./Cargo.lock) as normal.
 
-Rust toolchain versions are pinned by [./nix/rust-overlay.nix](./nix/rust-overlay.nix).
-
-Other nix packages are version pinned by niv in [./nix/sources.json](./nix/sources.json).
+Rust toolchain versions and nix packages are version pinned by niv in [./nix/sources.json](./nix/sources.json).
 
 ## Gripes
 
-For nix build support I'm using [naersk](https://github.com/nmattia/naersk) which requires cargo nightly as of the time of writing on 2021-04. See [naersk/issues/100](https://github.com/nmattia/naersk/issues/100) for technical details. It's possible to switch rustc alone to a stable release but cargo can't be moved along with it. I don't love this.
+For nix build support I'm using [fenix](https://github.com/nix-community/fenix) and [naersk](https://github.com/nmattia/naersk) which only support nightly toolchains as of time of writing (2021-04). I don't love this.
 
 ## License: CC0 [![License: CC0-1.0](https://licensebuttons.net/p/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 
