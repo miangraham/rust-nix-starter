@@ -33,6 +33,14 @@ Hello, world!
 
 ## Release build
 
+Regenerate `Cargo.nix` to reflect any new dependencies in `Cargo.lock`.
+
+```console
+$ nix-shell --pure
+$ crate2nix generate
+Generated ./Cargo.nix successfully.
+```
+
 Use `nix build`.
 
 ```console
@@ -56,7 +64,9 @@ Rust toolchain versions and nix packages are version pinned by niv in [./nix/sou
 
 ## Gripes
 
-For nix build support I'm using [fenix](https://github.com/nix-community/fenix) and [naersk](https://github.com/nmattia/naersk) which only support nightly toolchains as of time of writing (2021-04). I don't love this.
+For nix build support I'm using [crate2nix](https://github.com/kolloch/crate2nix) which requires generating an additional file (`Cargo.lock`) derived from `Cargo.toml`. Compared to other options this is only a minor annoyance.
+
+To keep configuration as simple as possible, the Rust toolchain version is decided by the current version of nixpkgs. This is typically a 1-2 month old stable version, and if you can tolerate the lack of control and being slightly out of date this is likely the easiest and best option for accessing Rust via nix. If you need to select a specific version, consider using the [Mozilla overlay](https://github.com/mozilla/nixpkgs-mozilla).
 
 ## License: CC0 [![License: CC0-1.0](https://licensebuttons.net/p/zero/1.0/80x15.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 
