@@ -4,6 +4,15 @@ Basic project template for Rust development using nix.
 
 All dependencies, including the Rust toolchain itself, are pinned for reproducibility. Development workflow uses cargo and associated tools. The release build is just a nix package.
 
+## Repo organization
+
+Alternative approaches to Rust toolchain selection are broken out into specialized branches to keep the top-level project simple. Below is a summary of the current options and tools used for each.
+
+| Branch Name | Rust Version | Nix Tools Used | Strong | Weak | Notes |
+| --- | --- | --- | --- | --- | --- |
+| stable | stable via nixpkgs | crate2nix | Stability, ease of use | Version selection | Rust toolchain is stock stable as decided by nixpkgs and only changable by moving the nixpkgs version. |
+| nightly | nightly via fenix | fenix, naersk | Ease of use, build time | Version selection | Rust toolchain is a recent nightly build as decided by fenix and only changeable by moving the fenix version. |
+
 ## Prerequisites
 
 All you need is a working [nix installation](https://nixos.org/guides/install-nix.html).
@@ -68,14 +77,14 @@ Lengthy CI build times are a common pitfall of rust+nix projects. Compiling depe
 
 Below are [Github Actions](https://github.com/miangraham/rust-nix-starter/actions) CI build times broken down by stage.
 
-Caveat: Nightly CI build avoids installing rust-analyzer due to the the nightly release compiling from source. This adds about 8 minutes to initial dev shell setup.
-
 | Stage | Stable | Nightly |
 | --- | --- | --- |
 | CI setup and Nix install | 8s | 8s |
 | Nix release build | 1m46s | 1m5s |
 | Dev shell test | 16s | 12s |
 | Total | 2m14s | 1m28s |
+
+Caveat: The nightly CI build avoids installing rust-analyzer due to the the nightly release compiling from source. When enabled this adds about 8 minutes to initial dev shell setup.
 
 ## Gripes
 
