@@ -54,6 +54,21 @@ Crate dependencies use [Cargo.lock](./Cargo.lock) as normal.
 
 Rust toolchain versions and nix packages are version pinned by niv in [./nix/sources.json](./nix/sources.json).
 
+## CI Cold Build Times
+
+Lengthy CI build times are a common pitfall of rust+nix projects. Compiling dependencies from source can easily result in CI builds taking 10-20 minutes.
+
+Below are [Github Actions](https://github.com/miangraham/rust-nix-starter/actions) CI build times broken down by stage.
+
+Caveat: Nightly CI build avoids installing rust-analyzer due to the the nightly release compiling from source. This adds about 8 minutes to initial dev shell setup.
+
+| Stage | Stable | Nightly |
+| --- | --- | --- |
+| CI setup and Nix install | 8s | 8s |
+| Nix release build | 1m46s | 1m5s |
+| Dev shell test | 16s | 12s |
+| Total | 2m14s | 1m28s |
+
 ## Gripes
 
 For nix build support I'm using [fenix](https://github.com/nix-community/fenix) and [naersk](https://github.com/nmattia/naersk) which only support nightly toolchains as of time of writing (2021-04). I don't love this.
