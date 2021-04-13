@@ -4,27 +4,27 @@ let
   pkgs = import sources.nixpkgs {
     inherit overlays;
   };
-  rust = pkgs.rust-nightly.complete.withComponents [
-    "cargo"
-    "clippy-preview"
-    "rust-src"
-    "rust-std"
-    "rustc"
-    "rustfmt-preview"
-  ];
-  rust-analyzer = pkgs.rust-analyzer-nightly;
+  rust = pkgs.rust-nightly.complete;
 in
 pkgs.mkShell {
   buildInputs =
     builtins.attrValues {
-      inherit rust;
-      inherit rust-analyzer;
+      inherit (rust)
+        rustc
+        cargo
+        clippy-preview
+        rustfmt-preview
+      ;
 
       inherit (pkgs)
         cargo-edit
         cargo-license
         cargo-outdated
         cargo-release
+
+        # rust-analyzer-nightly builds from source.
+        # This adds ~8m to CI nix-shell usage so leaving it out, but this is how you pull it in.
+        # rust-analyer-nightly
       ;
     };
 }
