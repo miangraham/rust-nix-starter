@@ -1,6 +1,7 @@
 let
   sources = import ./nix/sources.nix;
-  pkgs = import sources.nixpkgs {};
+  overlays = import ./nix/overlays.nix;
+  pkgs = import sources.nixpkgs { inherit overlays; };
 in
 pkgs.mkShell {
   buildInputs =
