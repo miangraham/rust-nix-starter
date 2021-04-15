@@ -77,6 +77,8 @@ Lengthy CI build times are a common pitfall of rust+nix projects. Compiling depe
 
 Below are [Github Actions](https://github.com/miangraham/rust-nix-starter/actions) CI build times broken down by stage.
 
+These need updating!
+
 | Stage | Stable | Nightly |
 | --- | --- | --- |
 | CI setup and Nix install | 8s | 8s |
